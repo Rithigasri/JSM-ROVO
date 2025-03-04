@@ -1,0 +1,40 @@
+
+
+modules:
+  rovo:agent:
+    - key: jsmrovo-asset-agent
+      name: Asset Retrieval Agent
+      description: An agent for fetching  network assets.
+      prompt: >
+        You are an agent that helps retrieve and classify network assets.
+      conversationStarters:
+        - Fetch all Network Assets
+       
+      actions:
+        - fetch-network-assets
+        - classify-assets  # Only classifies and stores in classified.txt
+
+  action:
+    - key: fetch-network-assets
+      name: Fetch Network Assets
+      function: fetchNetworkAssets
+      actionVerb: GET
+      description: >
+        Fetches all objects present in the 'Network Assets' object type.
+
+  function:
+    - key: fetchNetworkAssets
+      handler: index.fetchNetworkAssets 
+
+    
+
+permissions:
+  external:
+    fetch:
+      backend:
+        - 'https://api.atlassian.com'
+
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/e01f9d77-7cef-48ec-a1f0-79875803a9d0
