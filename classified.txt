@@ -1,0 +1,8 @@
+cable
+monitor
+mouse
+phone
+laptop
+keyboard
+software
+Network Assets

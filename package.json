@@ -6,6 +6,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "@forge/api": "^5.0.1"
+    "@forge/api": "^5.0.1",
+    "dotenv": "^16.4.7"
   }
 }

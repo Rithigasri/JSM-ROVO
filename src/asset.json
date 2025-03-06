@@ -119,12 +119,16 @@
       "objectKey": "JSMROV-869",
       "attributes": [
         {
-          "name": "Key",
-          "value": "JSMROV-869"
+          "name": "Description",
+          "value": "CAT 5e 100FT RJ45"
         },
         {
-          "name": "Name",
-          "value": "CAT 5e 100FT RJ45"
+          "name": "RestockThreshold",
+          "value": "10"
+        },
+        {
+          "name": "InStock",
+          "value": "15"
         },
         {
           "name": "Created",
@@ -135,24 +139,20 @@
           "value": "2025-02-23T14:09:42.811Z"
         },
         {
+          "name": "Key",
+          "value": "JSMROV-869"
+        },
+        {
+          "name": "Name",
+          "value": "CAT 5e 100FT RJ45"
+        },
+        {
           "name": "Cost",
           "value": "12.95"
         },
         {
-          "name": "Description",
-          "value": "CAT 5e 100FT RJ45"
-        },
-        {
-          "name": "RestockThreshold",
-          "value": "10"
-        },
-        {
           "name": "Type",
           "value": "Network Cable"
-        },
-        {
-          "name": "InStock",
-          "value": "15"
         },
         {
           "name": "Location",
@@ -174,18 +174,6 @@
           "value": "CAT 5e 300FT RJ45"
         },
         {
-          "name": "Created",
-          "value": "2025-02-23T14:09:42.845Z"
-        },
-        {
-          "name": "Updated",
-          "value": "2025-02-23T14:09:42.846Z"
-        },
-        {
-          "name": "Cost",
-          "value": "48"
-        },
-        {
           "name": "Description",
           "value": "CAT 5e 300FT RJ45"
         },
@@ -194,16 +182,28 @@
           "value": "5"
         },
         {
-          "name": "Type",
-          "value": "Network Cable"
+          "name": "Cost",
+          "value": "48"
+        },
+        {
+          "name": "Updated",
+          "value": "2025-02-23T14:09:42.846Z"
         },
         {
           "name": "InStock",
           "value": "6"
         },
         {
+          "name": "Type",
+          "value": "Network Cable"
+        },
+        {
           "name": "Location",
           "value": "Stockroom-SYD"
+        },
+        {
+          "name": "Created",
+          "value": "2025-02-23T14:09:42.845Z"
         }
       ]
     },
@@ -213,26 +213,6 @@
       "objectKey": "JSMROV-871",
       "attributes": [
         {
-          "name": "Key",
-          "value": "JSMROV-871"
-        },
-        {
-          "name": "Name",
-          "value": "CAT 5e 50FT RJ45"
-        },
-        {
-          "name": "Created",
-          "value": "2025-02-23T14:09:42.864Z"
-        },
-        {
-          "name": "Updated",
-          "value": "2025-02-23T14:09:42.864Z"
-        },
-        {
-          "name": "Cost",
-          "value": "8.8"
-        },
-        {
           "name": "Description",
           "value": "CAT 5e 50FT RJ45"
         },
@@ -241,16 +221,36 @@
           "value": "20"
         },
         {
-          "name": "Type",
-          "value": "Network Cable"
+          "name": "Created",
+          "value": "2025-02-23T14:09:42.864Z"
+        },
+        {
+          "name": "Location",
+          "value": "Stockroom-AUS"
+        },
+        {
+          "name": "Cost",
+          "value": "8.8"
+        },
+        {
+          "name": "Name",
+          "value": "CAT 5e 50FT RJ45"
         },
         {
           "name": "InStock",
           "value": "22"
         },
         {
-          "name": "Location",
-          "value": "Stockroom-AUS"
+          "name": "Type",
+          "value": "Network Cable"
+        },
+        {
+          "name": "Updated",
+          "value": "2025-02-23T14:09:42.864Z"
+        },
+        {
+          "name": "Key",
+          "value": "JSMROV-871"
         }
       ]
     },
@@ -299,26 +299,6 @@
       "objectKey": "JSMROV-872",
       "attributes": [
         {
-          "name": "Key",
-          "value": "JSMROV-872"
-        },
-        {
-          "name": "Name",
-          "value": "DVI HDMI 25FT"
-        },
-        {
-          "name": "Created",
-          "value": "2025-02-23T14:09:42.904Z"
-        },
-        {
-          "name": "Updated",
-          "value": "2025-02-23T14:09:42.904Z"
-        },
-        {
-          "name": "Cost",
-          "value": "34"
-        },
-        {
           "name": "Description",
           "value": "DVI HDMI Cable Premium 25FT"
         },
@@ -327,16 +307,36 @@
           "value": "10"
         },
         {
-          "name": "Type",
-          "value": "Display Cable"
+          "name": "Name",
+          "value": "DVI HDMI 25FT"
+        },
+        {
+          "name": "Location",
+          "value": "Stockroom-AMS"
+        },
+        {
+          "name": "Key",
+          "value": "JSMROV-872"
+        },
+        {
+          "name": "Cost",
+          "value": "34"
         },
         {
           "name": "InStock",
           "value": "20"
         },
         {
-          "name": "Location",
-          "value": "Stockroom-AMS"
+          "name": "Type",
+          "value": "Display Cable"
+        },
+        {
+          "name": "Updated",
+          "value": "2025-02-23T14:09:42.904Z"
+        },
+        {
+          "name": "Created",
+          "value": "2025-02-23T14:09:42.904Z"
         }
       ]
     },

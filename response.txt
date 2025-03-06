@@ -1,0 +1,248 @@
+// export async function fetchAndClassify(event, context) {
+//     // Fetch existing object types and save to classified.txt
+//     const objectTypes = await fetchObjectTypes();
+//     await saveObjectTypesToFile(objectTypes);
+
+//     // Fetch network assets and classify them
+//     const url = `${BASE_URL}/object/aql?startAt=0&maxResults=50&includeAttributes=true`;
+//     const payload = { qlQuery: "objectType = \"Network Assets\"" };
+    
+//     try {
+//         const response = await api.fetch(url, {
+//             method: "POST",
+//             headers: HEADERS,
+//             body: JSON.stringify(payload)
+//         });
+
+//         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+//         const data = await response.json();
+//         const assets = data.values || [];
+
+//         if (assets.length === 0) {
+//             fs.writeFileSync("asset.json", JSON.stringify({ networkAssets: [] }, null, 2));
+//             return { networkAssets: [] };
+//         }
+
+//         const objectTypeId = assets[0]?.objectType?.id;
+//         console.log("Fetching attributes for objectTypeId:", objectTypeId);
+//         const attributes = await fetchAttributes(objectTypeId);
+//         const attributeMap = Object.fromEntries(attributes.map(attr => [attr.id, attr.name]));
+
+//         const formattedAssets = {
+//             networkAssets: assets.map(asset => ({
+//                 id: asset.id,
+//                 label: asset.label,
+//                 objectKey: asset.objectKey,
+//                 attributes: asset.attributes
+//                     .map(attr => ({
+//                         name: attributeMap[attr.objectTypeAttributeId],
+//                         value: attr.objectAttributeValues?.[0]?.value
+//                     }))
+//                     .filter(attr => attr.name && attr.value)
+//             }))
+//         };
+
+//         // Save response to asset.json
+//         fs.writeFileSync("./src/asset.json", JSON.stringify(formattedAssets, null, 2));
+//         console.log("Response saved to asset.json");
+
+//         return formattedAssets;
+//     } catch (error) {
+//         console.error("Error fetching network assets:", error.message);
+//         fs.writeFileSync("asset.json", JSON.stringify({ networkAssets: [] }, null, 2));
+//         return { networkAssets: [] };
+//     }
+// }
+
+
+// export async function createObjectTypes(event) {
+//     console.log("createObjectTypes function triggered");
+//     console.log("Received event:", JSON.stringify(event, null, 2));
+//     console.log("Hello World")
+
+//     return { message: "Hello, World!" };
+// }
+
+
+// export async function createObjectTypes(event) {
+//     console.log("Fetching Confluence page content using Forge API...");
+//     const pageId = "9601097";
+//     const confluenceUrl = route`/wiki/rest/api/content/${pageId}?expand=body.storage`;
+
+//     try {
+//         // Fetch Confluence page content
+//         const confluenceResponse = await api.asApp().requestConfluence(confluenceUrl, {
+//             method: "GET",
+//             headers: { "Accept": "application/json" }
+//         });
+
+//         console.log("Status Code:", confluenceResponse.status);
+
+//         if (!confluenceResponse.ok) {
+//             const errorText = await confluenceResponse.text();
+//             console.error("Failed to fetch Confluence page:", confluenceResponse.status, errorText);
+//             return;
+//         }
+
+//         const confluenceData = await confluenceResponse.json();
+//         console.log("Confluence Page Content:", confluenceData.body.storage.value);
+
+//         // Extract and format object types
+//         const newObjectTypes = confluenceData.body.storage.value
+//             .split(',')
+//             .map(type => type.trim())
+//             .filter(Boolean);
+
+//         console.log("Parsed Object Types:", newObjectTypes);
+
+//         // Fetch existing object types using REST API
+//         console.log("Fetching existing object types...");
+//         const workspaceId = "9639f74b-a7d7-4189-9acb-9a493cbfe46f"; // Replace with actual workspace ID
+//         const schemaId = 11;
+//         const fetchUrl = `https://api.atlassian.com/jsm/assets/workspace/${workspaceId}/v1/objectschema/${schemaId}/objecttypes`;
+
+//         const fetchResponse = await api.fetch(fetchUrl, {
+//             method: "GET",
+//             headers: HEADERS
+//         });
+
+//         console.log("Status Code:", fetchResponse.status);
+
+//         if (!fetchResponse.ok) {
+//             const errorText = await fetchResponse.text();
+//             console.error("Failed to fetch object types:", fetchResponse.status, errorText);
+//             return;
+//         }
+
+//         // **PRINT THE RAW RESPONSE TO DEBUG**
+//         const responseData = await fetchResponse.json();
+//         console.log("Raw API Response:", JSON.stringify(responseData, null, 2));
+
+//         // **Fix: Handle array response correctly**
+//         if (!Array.isArray(responseData)) {
+//             console.error("Unexpected API response format. Expected an array.");
+//             return;
+//         }
+
+//         // Extract object type names correctly
+//         const existingObjectTypes = responseData.map(obj => obj.name);
+//         console.log("Existing Object Types:", existingObjectTypes);
+
+//         // Compare and log missing object types
+//         const missingObjectTypes = newObjectTypes.filter(type => !existingObjectTypes.includes(type));
+//         console.log("Missing Object Types to be created:", missingObjectTypes);
+
+//         // Since object type creation is not yet supported, we stop here
+//         console.log("Skipping creation step as object type creation is not supported via API.");
+
+//     } catch (error) {
+//         console.error("Error in createObjectTypes:", error);
+//     }
+// }
+
+// export async function createObjectTypes(event) {
+//     console.log("Fetching Confluence page content using Forge API...");
+//     const pageId = "9601097";
+//     const confluenceUrl = route`/wiki/rest/api/content/${pageId}?expand=body.storage`;
+
+//     try {
+//         // Fetch Confluence page content
+//         const confluenceResponse = await api.asApp().requestConfluence(confluenceUrl, {
+//             method: "GET",
+//             headers: { "Accept": "application/json" }
+//         });
+
+//         console.log("Status Code:", confluenceResponse.status);
+
+//         if (!confluenceResponse.ok) {
+//             const errorText = await confluenceResponse.text();
+//             console.error("Failed to fetch Confluence page:", confluenceResponse.status, errorText);
+//             return;
+//         }
+
+//         const confluenceData = await confluenceResponse.json();
+//         console.log("Confluence Page Content:", confluenceData.body.storage.value);
+
+//         // Extract and format object types
+//         const newObjectTypes = confluenceData.body.storage.value
+//             .split(',')
+//             .map(type => type.trim())
+//             .filter(Boolean);
+
+//         console.log("Parsed Object Types:", newObjectTypes);
+
+//         // Fetch existing object types using REST API
+//         console.log("Fetching existing object types...");
+//         const workspaceId = "9639f74b-a7d7-4189-9acb-9a493cbfe46f"; // Replace with actual workspace ID
+//         const schemaId = 11;
+//         const fetchUrl = `https://api.atlassian.com/jsm/assets/workspace/${workspaceId}/v1/objectschema/${schemaId}/objecttypes`;
+
+//         const fetchResponse = await api.fetch(fetchUrl, {
+//             method: "GET",
+//             headers: HEADERS
+//         });
+
+//         console.log("Status Code:", fetchResponse.status);
+
+//         if (!fetchResponse.ok) {
+//             const errorText = await fetchResponse.text();
+//             console.error("Failed to fetch object types:", fetchResponse.status, errorText);
+//             return;
+//         }
+
+//         // **PRINT THE RAW RESPONSE TO DEBUG**
+//         const responseData = await fetchResponse.json();
+//         console.log("Raw API Response:", JSON.stringify(responseData, null, 2));
+
+//         // **Handle array response correctly**
+//         if (!Array.isArray(responseData)) {
+//             console.error("Unexpected API response format. Expected an array.");
+//             return;
+//         }
+
+//         // Extract object type names correctly
+//         const existingObjectTypes = responseData.map(obj => obj.name);
+//         console.log("Existing Object Types:", existingObjectTypes);
+
+//         // Compare and log missing object types
+//         const missingObjectTypes = newObjectTypes.filter(type => !existingObjectTypes.includes(type));
+//         console.log("Missing Object Types to be created:", missingObjectTypes);
+
+//         // **Create missing object types**
+//         for (const objectType of missingObjectTypes) {
+//             console.log(`Creating object type: ${objectType}`);
+
+//             const createUrl = `https://api.atlassian.com/jsm/assets/workspace/${workspaceId}/v1/objecttype/create`;
+
+//             const payload = {
+//                 inherited: false,
+//                 abstractObjectType: false,
+//                 objectSchemaId: schemaId,
+//                 iconId: "13", // Default icon ID, modify as needed
+//                 name: objectType,
+//                 description: `Auto-created object type: ${objectType}`
+//             };
+
+//             const createResponse = await api.fetch(createUrl, {
+//                 method: "POST",
+//                 headers: {
+//                     ...HEADERS,
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify(payload)
+//             });
+
+//             console.log(`Status Code for ${objectType}:`, createResponse.status);
+
+//             if (!createResponse.ok) {
+//                 const errorText = await createResponse.text();
+//                 console.error(`Failed to create object type ${objectType}:`, createResponse.status, errorText);
+//             } else {
+//                 console.log(`Successfully created object type: ${objectType}`);
+//             }
+//         }
+
+//     } catch (error) {
+//         console.error("Error in createObjectTypes:", error);
+//     }
+// }

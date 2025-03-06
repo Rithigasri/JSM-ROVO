@@ -1,38 +1,180 @@
+# # modules:
+# #   rovo:agent:
+# #     - key: jsmrovo-asset-agent
+# #       name: Asset Retrieval Agent
+# #       description: An agent for fetching and classifying network assets.
+# #       prompt: >
+# #         You are an agent that helps retrieve and classify network assets.
+# #         For all the assets passed, classify them into possible object types such as Software, Cable, Monitor, Mouse, Phone, Laptop, etc and return the list of object types as a single line separated by commas.
+# #       conversationStarters:
+# #         - Fetch and Classify Network Assets
+        
+       
+# #       actions:
+# #         - fetch-and-classify-network-assets
 
+# #   action:
+# #     - key: fetch-and-classify-network-assets
+# #       name: Fetch and Classify Network Assets
+# #       function: fetchAndClassify
+# #       actionVerb: GET
+# #       description: >
+# #         Fetches all objects present in the 'Network Assets' object type and classifies them.
+
+# #   function:
+# #     - key: fetchAndClassify
+# #       handler: index.fetchAndClassify 
+
+# # permissions:
+# #   external:
+# #     fetch:
+# #       backend:
+# #         - 'https://api.atlassian.com'
+
+# # app:
+# #   runtime:
+# #     name: nodejs22.x
+# #   id: ari:cloud:ecosystem::app/e01f9d77-7cef-48ec-a1f0-79875803a9d0
+
+# modules:
+#   rovo:agent:
+#     - key: jsmrovo-asset-agent
+#       name: Asset Retrieval Agent
+#       description: An agent for fetching and classifying network assets.
+#       prompt: >
+#         You are an agent that helps retrieve and classify network assets.
+#         For all the assets passed, classify them into possible object types such as Software, Cable, Monitor, Mouse, Phone, Laptop, etc and return the list of object types for all objects passed as a single line separated by commas, like monitor, monitor, mouse, etc.
+#       conversationStarters:
+#         - Fetch and Classify Network Assets
+#       actions:
+#         - fetch-and-classify-network-assets
+#         - create-object-types  # New action added
+
+#   action:
+#     - key: fetch-and-classify-network-assets
+#       name: Fetch and Classify Network Assets
+#       function: fetchAndClassify
+#       actionVerb: GET
+#       description: >
+#         Fetches all objects present in the 'Network Assets' object type and classifies them.
+
+#     - key: create-object-types  # New action
+#       name: Create Object Types
+#       function: createObjectTypes
+#       actionVerb: GET
+#       description: >
+#         Reads data from a Confluence page and creates object types in Rovo.
+
+#   function:
+#     - key: fetchAndClassify
+#       handler: index.fetchAndClassify
+
+#     - key: createObjectTypes  # New function
+#       handler: index.createObjectTypes
+
+# permissions:
+#   external:
+#     fetch:
+#       backend:
+#         - 'https://api.atlassian.com'
+#         - 'https://one-atlas-onki.atlassian.net'
+
+#   scopes:
+#     - 'read:confluence-content.all'
+#     - 'read:confluence-content.summary'
+#     - 'import:import-configuration:cmdb'
+#     - 'read:cmdb-object:jira'
+#     - 'write:cmdb-object:jira'
+#     - 'delete:cmdb-object:jira'
+#     - 'read:cmdb-schema:jira'
+#     - 'write:cmdb-schema:jira'
+#     - 'delete:cmdb-schema:jira'
+#     - 'read:cmdb-type:jira'
+#     - 'write:cmdb-type:jira'
+#     - 'delete:cmdb-type:jira'
+#     - 'read:cmdb-attribute:jira'
+#     - 'write:cmdb-attribute:jira'
+#     - 'delete:cmdb-attribute:jira'
+#     - 'read:cmdb-icon:jira'
+
+
+
+# app:
+#   runtime:
+#     name: nodejs22.x
+#   id: ari:cloud:ecosystem::app/e01f9d77-7cef-48ec-a1f0-79875803a9d0
 
 modules:
   rovo:agent:
     - key: jsmrovo-asset-agent
       name: Asset Retrieval Agent
-      description: An agent for fetching  network assets.
+      description: An agent for fetching and classifying network assets.
       prompt: >
         You are an agent that helps retrieve and classify network assets.
+        For all the assets passed, classify them into possible object types such as Software, Cable, Monitor, Mouse, Phone, Laptop, etc and return the list of object types for all objects passed as a single line separated by commas, like monitor, monitor, mouse, etc.
       conversationStarters:
-        - Fetch all Network Assets
-       
+        - Fetch and Classify Network Assets
       actions:
-        - fetch-network-assets
-        - classify-assets  # Only classifies and stores in classified.txt
+        - fetch-and-classify-network-assets
+        - create-object-types
+        - post-objects  # New action for posting objects
 
   action:
-    - key: fetch-network-assets
-      name: Fetch Network Assets
-      function: fetchNetworkAssets
+    - key: fetch-and-classify-network-assets
+      name: Fetch and Classify Network Assets
+      function: fetchAndClassify
       actionVerb: GET
       description: >
-        Fetches all objects present in the 'Network Assets' object type.
+        Fetches all objects present in the 'Network Assets' object type and classifies them.
+
+    - key: create-object-types
+      name: Create Object Types
+      function: createObjectTypes
+      actionVerb: GET
+      description: >
+        Reads data from a Confluence page and creates object types in Rovo.
+
+    - key: post-objects  # New action
+      name: Post Objects
+      function: postObjects
+      actionVerb: GET
+      description: >
+        Fetches assets, maps attributes, and posts objects under the respective object types.
 
   function:
-    - key: fetchNetworkAssets
-      handler: index.fetchNetworkAssets 
+    - key: fetchAndClassify
+      handler: index.fetchAndClassify
 
-    
+    - key: createObjectTypes
+      handler: index.createObjectTypes
+
+    - key: postObjects  # New function
+      handler: index.postObjects
 
 permissions:
   external:
     fetch:
       backend:
         - 'https://api.atlassian.com'
+        - 'https://one-atlas-onki.atlassian.net'
+
+  scopes:
+    - 'read:confluence-content.all'
+    - 'read:confluence-content.summary'
+    - 'import:import-configuration:cmdb'
+    - 'read:cmdb-object:jira'
+    - 'write:cmdb-object:jira'
+    - 'delete:cmdb-object:jira'
+    - 'read:cmdb-schema:jira'
+    - 'write:cmdb-schema:jira'
+    - 'delete:cmdb-schema:jira'
+    - 'read:cmdb-type:jira'
+    - 'write:cmdb-type:jira'
+    - 'delete:cmdb-type:jira'
+    - 'read:cmdb-attribute:jira'
+    - 'write:cmdb-attribute:jira'
+    - 'delete:cmdb-attribute:jira'
+    - 'read:cmdb-icon:jira'
 
 app:
   runtime:
