@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const EMAIL = "rithigasri.b@cprime.com";
-const API_TOKEN = "ATATT3xFfGF0pgjRiJObiFZ0Eq7Pb40_7k904-jCpf8kmi_6H_ARL2qmw3Gyp-hqacc340Yc0td-chspcpifPbv_lQQI9eT_J1sR5t-Pdw579xyWn_6RXKMlKILR_zA7Hd5UCvqQ-FFQsUmv0GNSM0nvw4o-3egbnJbTgC2NQm3GNH-xdnTckg4=6378803C";
+const API_TOKEN = "******";
 const WORKSPACE_ID = "9639f74b-a7d7-4189-9acb-9a493cbfe46f";
 const authHeader = Buffer.from(`${EMAIL}:${API_TOKEN}`).toString('base64');
 
